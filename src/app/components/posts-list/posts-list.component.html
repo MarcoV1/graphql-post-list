@@ -1,0 +1,48 @@
+<div class="table-header">
+  <h1>List of Posts</h1>
+
+  <div class="action-header">
+    <mat-form-field style="margin-right: 2rem">
+      <input matInput placeholder="Search" (keyup)="onSearchChanged($event.target)">
+      <button matSuffix mat-button></button>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" routerLink="/create">Add new Post</button>
+  </div>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef> Title</th>
+    <td mat-cell *matCellDef="let post"> {{post.title}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="username">
+    <th mat-header-cell *matHeaderCellDef> User Name</th>
+    <td mat-cell *matCellDef="let post"> {{post?.user?.name ? post.user.name : "-" }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef> Email</th>
+    <td mat-cell *matCellDef="let post"> {{post?.user?.email ? post.user.email : "-" }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let post">
+      <button mat-raised-button color="primary" class="button-styling" (click)="onViewButtonClicked(post)">View</button>
+      <button mat-raised-button color="primary" class="button-styling" (click)="onUpdateButtonClicked(post)">Update
+      </button>
+      <button mat-raised-button color="warn" class="button-styling" (click)="onDeleteButtonClicked(post)">Delete
+      </button>
+    </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 25]" [pageSize]="100"
+               (page)="handlePageEvent($event)"></mat-paginator>

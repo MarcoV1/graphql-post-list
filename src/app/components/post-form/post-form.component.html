@@ -1,0 +1,24 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title"
+             class="form-input">
+    </mat-form-field>
+
+    <mat-form-field class="form-group">
+      <mat-label>Body</mat-label>
+      <textarea matInput formControlName="body"
+                class="form-input"></textarea>
+    </mat-form-field>
+  </div>
+
+  <div class="form-actions">
+    <button mat-raised-button color="primary" routerLink="/list">Go back</button>
+    <div>
+      <button style="margin-right: 0.33rem" mat-stroked-button (click)="onReset()">Reset
+      </button>
+      <button mat-raised-button color="primary">{{ addingNewPost ? "Add" : "Update" }}</button>
+    </div>
+  </div>
+</form>
